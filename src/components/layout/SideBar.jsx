@@ -1,15 +1,13 @@
-'use client';
-import React, { useState, useCallback } from 'react';
-import KelickLogo from '@/assets/icons/kelick-logo-svg.svg';
+import React from 'react';
+import { ICONS } from '@/assets/url';
+// import KelickLogo from '@/assets/icons/kelick-logo-svg.svg';
 import Icon from '../ui/Icon';
-import { useAppContext } from '@/context/AppContext';
 import {
   organizationsConst,
   sideBarManageConst,
   dashboardConst,
 } from '@/constants/appConstants';
 import { SideNavContainer } from '../styles/StyledContainers';
-import { StyledLink } from '../styles/StyledLink';
 import useWindowWidth from '@/hooks/useWindowWidth';
 import { MenuItem } from '../app/MenuItem';
 import { AccountPanel } from '../app/AccountPanel';
@@ -23,8 +21,8 @@ const SideBar = () => {
         <div>
           <div className="flex flex-row items-center mb-8">
             <Icon
-              src={KelickLogo}
-              className="w-28 h-7"
+              src={ICONS.KelickLogo}
+              // className="w-28 h-7"
               width={28}
               height={7}
               alt="Kelick Logo"

@@ -1,5 +1,4 @@
 import AvatarIcon from '@/assets/icons/avatar.webp';
-import { StyledLink } from '../styles/StyledLink';
 import Icon from '../ui/Icon';
 import { useAppContext } from '@/context/AppContext';
 import Text from '../ui/Text';

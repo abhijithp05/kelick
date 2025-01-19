@@ -1,19 +1,64 @@
-import DashboardIcon from '@/assets/icons/dashboard.webp';
-import OrganisationIcon from '@/assets/icons/organisation.webp';
-import EmployeesIcon from '@/assets/icons/employees.webp';
-import PayrollIcon from '@/assets/icons/payroll.webp';
-import LeavesIcon from '@/assets/icons/leaves.webp';
-import ClaimsIcon from '@/assets/icons/claims.webp';
-import MoreIcon from '@/assets/icons/more.webp';
-import PlanIcon from '@/assets/icons/plan.webp';
-import NotiifcationIcon from '@/assets/icons/notification.webp';
+import { ICONS } from '@/assets/url';
+// import DashboardIcon from '@/assets/icons/dashboard.webp';
+// import OrganisationIcon from '@/assets/icons/organisation.webp';
+// import EmployeesIcon from '@/assets/icons/employees.webp';
+// import PayrollIcon from '@/assets/icons/payroll.webp';
+// import LeavesIcon from '@/assets/icons/leaves.webp';
+// import ClaimsIcon from '@/assets/icons/claims.webp';
+// import MoreIcon from '@/assets/icons/more.webp';
+// import PlanIcon from '@/assets/icons/plan.webp';
+// import NotiifcationIcon from '@/assets/icons/notification.webp';
+
+export const colorConst = ['#02B9B0', '#FAC905', '#B774FC', '#B3BEBE'];
+
+export const employeeColumnHeader = [
+  {
+    key: 'Employee ID',
+    header: 'Employee id',
+  },
+  {
+    key: 'Employee Profile',
+    header: 'Employee profile',
+  },
+  {
+    key: 'Email',
+    header: 'Email',
+  },
+  {
+    key: 'Role',
+    header: 'Role',
+  },
+  {
+    key: 'Status',
+    header: 'Status',
+  },
+];
+
+export const nationalityConst = {
+  title: { key: 'Nationality', label: 'Nationality' },
+  content: { key: 'Singaporean', label: 'Singaporean' },
+};
+
+export const employeeStatusConst = {
+  title: { key: 'Status', label: 'Employee Status' },
+  content: { key: 'Active', label: 'Active Employees' },
+};
+
+export const employeeTypeConst = {
+  title: { key: 'Employment Type', label: 'Employment Type' },
+  content: { key: 'Full Timer', label: 'Full Timer' },
+};
+
+export const employeeRoleConst = {
+  title: { key: 'Role', label: 'Employee Role' },
+};
 
 export const freePlanConst = {
   freePlan: {
     label: 'Free Plan',
     title: 'Free Plan',
     disabled: true,
-    icon: PlanIcon,
+    icon: ICONS.PlanIcon,
   },
 };
 
@@ -22,7 +67,7 @@ export const notificationConst = {
     label: 'Notifications',
     title: 'Notifications',
     disabled: true,
-    icon: NotiifcationIcon,
+    icon: ICONS.NotiifcationIcon,
   },
 };
 
@@ -31,7 +76,7 @@ export const dashboardConst = {
     label: 'Dashboard',
     title: 'Dashboard',
     disabled: true,
-    icon: DashboardIcon,
+    icon: ICONS.DashboardIcon,
   },
 };
 
@@ -39,7 +84,7 @@ export const organizationsConst = {
   kelick: {
     label: 'Kelick',
     disabled: true,
-    icon: OrganisationIcon,
+    icon: ICONS.OrganisationIcon,
   },
 };
 
@@ -48,60 +93,31 @@ export const sideBarManageConst = {
     label: 'Employees',
     title: 'Employees',
     disabled: false,
-    icon: EmployeesIcon,
+    icon: ICONS.EmployeesIcon,
   },
   payroll: {
     label: 'Payroll',
     title: 'Payroll',
     disabled: false,
-    icon: PayrollIcon,
+    icon: ICONS.PayrollIcon,
   },
   leaves: {
     label: 'Leaves',
     title: 'Leaves',
     disabled: false,
-    icon: LeavesIcon,
+    icon: ICONS.LeavesIcon,
   },
   claims: {
     label: 'Claims',
     title: 'Claims',
     disabled: false,
-    icon: ClaimsIcon,
+    icon: ICONS.ClaimsIcon,
   },
 
   more: {
     label: 'More',
     title: 'More',
     disabled: true,
-    icon: MoreIcon,
+    icon: ICONS.MoreIcon,
   },
 };
-
-export const tabs = [
-  { name: 'Edit Profile', disabled: false },
-  { name: 'Preferences', disabled: true },
-  { name: 'Security', disabled: true },
-];
-
-export const settingsFields = [
-  { label: 'Your Name', field: 'name', type: 'text', required: true },
-  { label: 'User Name', field: 'usernName', type: 'text', required: true },
-  { label: 'Email', field: 'email', type: 'email', required: true },
-  { label: 'Password', field: 'password', type: 'password', required: true },
-  { label: 'Date of Birth', field: 'dob', type: 'date', required: true },
-  {
-    label: 'Present Address',
-    field: 'presentAddress',
-    type: 'text',
-    required: false,
-  },
-  {
-    label: 'Permanent Address',
-    field: 'permanentAddress',
-    type: 'text',
-    required: true,
-  },
-  { label: 'City', field: 'city', type: 'text', required: false },
-  { label: 'Postal Code', field: 'postal', type: 'text', required: true },
-  { label: 'Country', field: 'country', type: 'text', required: true },
-];
