@@ -17,8 +17,11 @@ export const MainBodyContainer = styled.main`
   margin-top: 95px;
   margin-left: 14rem;
   background-color: #f2f5f5;
+  display: flex;
+  justify-content: center;
   height: 100%;
-  width: 100%;
+  width: 85%;
+  overflow-x: hidden;
 `;
 
 export const SideNavContainer = styled.div`

@@ -1,13 +1,13 @@
 import { useState, useCallback } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import DownIcon from '@/assets/icons/down.webp';
+import { ICONS } from '@/assets/url';
+// import DownIcon from '@/assets/icons/down.webp';
 import { StyledLink } from '../styles/StyledLink';
 import Icon from '../ui/Icon';
 
 export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
-  const { appContext: { isSideBarVisible } = {}, setApplicationContext } =
-    useAppContext() || {};
-  const [selected, setSelected] = useState('');
+  const { setApplicationContext } = useAppContext() || {};
+  const [selected, setSelected] = useState('Employees');
   const [isExpended, setExpended] = useState(true);
 
   const handleLinkClick = useCallback(
@@ -31,9 +31,10 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
           </h3>
           {isExpendable && (
             <Icon
-              src={DownIcon}
+              src={ICONS.DownIcon}
               onClick={toggleExpendable}
-              className="h-5 w-5"
+              width={0.875}
+              height={0.46}
             />
           )}
         </div>
