@@ -21,8 +21,8 @@ const Icon = ({
   src, // Path to image (WebP, PNG, etc.)
   className,
   loading = 'lazy',
-  width,
-  height,
+  width = 24,
+  height = 24,
   color,
   disabled,
   alt = 'Icon', // Alt text for image

@@ -19,3 +19,8 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.dotted-border {
+  border: 4px dotted transparent; /* Set default border as dotted and transparent */
+  border-image: radial-gradient(circle, #b3bebe 3px, transparent 6px) 1;
+}
