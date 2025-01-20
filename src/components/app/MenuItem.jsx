@@ -49,9 +49,9 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
             key={key}
             className={`flex flex-row items-center ml-2 gap-[10px] ${
               selected === value.label
-                ? 'bg-light-gray-100 border-light-gray-200 border-[1px] rounded-[12px] p-1'
+                ? 'bg-light-gray-100 border-light-gray-200 border-[1px] rounded-[12px] px-1 py-[2px]'
                 : ''
-            }`}
+            } hover:bg-light-gray-400 hover:border-light-gray-200 hover:border-[1px] hover:rounded-[12px] hover:p-[2px]`}
           >
             <Icon
               src={value.icon}

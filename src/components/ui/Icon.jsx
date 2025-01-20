@@ -3,17 +3,17 @@ import Image from 'next/image';
 
 const Icon = ({
   icon: IconComponent,
-  src, // Path to image (WebP, PNG, etc.)
+  src,
   className,
   loading = 'lazy',
-  width = 24,
-  height = 24,
+  width = 1.5,
+  height = 1.5,
   color,
   disabled,
-  alt = 'Icon', // Alt text for image
+  alt = 'Icon',
   ...rest
 }) => {
-  if (!IconComponent && !src) return null; // If no icon or src provided, return null
+  if (!IconComponent && !src) return null;
 
   // Check if the passed `icon` is a React component (SVG)
   const isSvg = typeof IconComponent === 'function';
@@ -21,14 +21,12 @@ const Icon = ({
   return (
     <div
       className={`inline-flex justify-center items-center w-[${
-        width || '24px'
-      }] h-[${height || '24px'}] ${color ? `text-${color}` : ''} ${
+        width || '24'
+      }] h-[${height || '24'}] ${color ? `text-${color}` : ''} ${
         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
       }`}
       color={color}
       disabled={disabled}
-      width={width}
-      height={height}
       {...rest}
     >
       {isSvg ? (
@@ -37,7 +35,7 @@ const Icon = ({
           width={width}
           height={height}
           alt={alt}
-          layout="fill" // Ensures Image covers its parent container
+          layout="fill"
           objectFit="contain"
           className={`transition-all duration-200 ${
             color ? `fill-[${color}]` : ''

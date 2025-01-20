@@ -8,8 +8,10 @@ import {
   employeeRoleConst,
   employeeStatusConst,
 } from '@/constants/appConstants';
+import { useAppContext } from '@/context/AppContext';
 
 const HomeScreen = () => {
+  const { setApplicationContext } = useAppContext() || {};
   const [file, setFile] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [filter, setFilter] = useState({ role: '', status: '' });
@@ -31,26 +33,40 @@ const HomeScreen = () => {
   console.log('file', file);
 
   useEffect(() => {
-    if (file.length === 0) return;
+    if (file.length === 0) {
+      setApplicationContext({
+        topNav: {
+          showAddEmployee: false,
+        },
+      });
+      return;
+    }
     const { title } = employeeRoleConst || {};
     const roleCount = getCount(title.key, file);
     const statusCount = getCount(employeeStatusConst.title.key, file);
 
     setEmployeeOption((prev) => ({
       ...prev,
-      roleOptions: Object.keys(roleCount),
-      statusOptions: Object.keys(statusCount),
+      roleOptions: ['All Role', ...Object.keys(roleCount)],
+      statusOptions: ['All Status', ...Object.keys(statusCount)],
     }));
+    setApplicationContext({
+      topNav: {
+        showAddEmployee: true,
+      },
+    });
   }, [file]);
 
   const filteredEmployees = useMemo(() => {
     return file.filter((employee) => {
-      const roleMatch = filter.role
-        ? employee.Role.toLowerCase().includes(filter.role.toLowerCase())
-        : true;
-      const statusMatch = filter.status
-        ? employee.Status.toLowerCase().includes(filter.status.toLowerCase())
-        : true;
+      const roleMatch =
+        filter.role && filter.role !== 'All Role'
+          ? employee.Role.toLowerCase().includes(filter.role.toLowerCase())
+          : true;
+      const statusMatch =
+        filter.status && filter.status !== 'All Status'
+          ? employee.Status.toLowerCase().includes(filter.status.toLowerCase())
+          : true;
       const searchMatch = filter.searchedText
         ? employee.Employee.toLowerCase().includes(
             filter.searchedText.toLowerCase()

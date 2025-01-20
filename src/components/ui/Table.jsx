@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import Icon from './Icon';
 import { ICONS } from '@/assets/url';
+// import * as XLSX from 'xlsx';
 
-const Table = ({ columns, data, onRowSelect }) => {
+const Table = ({
+  columns,
+  data,
+  idKey = 'Employee ID',
+  onSelectRows,
+  selectedRows = [],
+}) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-  const [selectedRows, setSelectedRows] = useState([]);
 
   // Sorting function
   const sortedData = React.useMemo(() => {
@@ -36,12 +42,20 @@ const Table = ({ columns, data, onRowSelect }) => {
 
   // Handle row selection
   const handleRowSelection = (id) => {
-    setSelectedRows((prevSelected) =>
+    onSelectRows((prevSelected) =>
       prevSelected.includes(id)
         ? prevSelected.filter((rowId) => rowId !== id)
         : [...prevSelected, id]
     );
-    if (onRowSelect) onRowSelect(id, selectedRows);
+  };
+
+  // Handle "Select All" checkbox
+  const handleSelectAll = () => {
+    if (selectedRows.length === data.length) {
+      onSelectRows([]);
+    } else {
+      onSelectRows(data.map((row) => row[idKey])); // Select all rows
+    }
   };
 
   return (
@@ -49,17 +63,11 @@ const Table = ({ columns, data, onRowSelect }) => {
       <table className="min-w-full border-separate table-auto rounded-xl border border-light-gray-200">
         <thead>
           <tr className="light-gray-400 h-14">
-            <th className="p-2">
+            <th className="py-2 pr-3 pl-[2px]">
               <input
                 type="checkbox"
-                checked={selectedRows.length === data.length}
-                onChange={() => {
-                  if (selectedRows.length === data.length) {
-                    setSelectedRows([]);
-                  } else {
-                    setSelectedRows(data.map((row) => row.id));
-                  }
-                }}
+                checked={selectedRows.length === data.length} // Check if all rows are selected
+                onChange={handleSelectAll} // Handle "Select All" toggle
               />
             </th>
             {columns.map((column) => (
@@ -81,19 +89,25 @@ const Table = ({ columns, data, onRowSelect }) => {
         </thead>
         <tbody>
           {sortedData.map((row) => (
-            <tr key={row.id} className="border-t bg-white h-14">
+            <tr key={row?.[idKey]} className="border-t bg-white h-14">
               <td className="py-2 px-3">
                 <input
                   type="checkbox"
-                  checked={selectedRows.includes(row.id)}
-                  onChange={() => handleRowSelection(row.id)}
+                  checked={selectedRows.includes(row?.[idKey])}
+                  onChange={() => handleRowSelection(row?.[idKey])}
                 />
               </td>
-              {columns.map((column) => (
-                <td key={column.key} className="py-2 px-3">
-                  {row[column.key]}
-                </td>
-              ))}
+              {columns.map((column) => {
+                const cellContent = column.render
+                  ? column.render(row, column)
+                  : row[column.key];
+
+                return (
+                  <td key={column.key} className="py-2 px-3">
+                    {cellContent}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
