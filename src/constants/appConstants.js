@@ -1,4 +1,5 @@
 import { ICONS } from '@/assets/url';
+import Icon from '@/components/ui/Icon';
 // import DashboardIcon from '@/assets/icons/dashboard.webp';
 // import OrganisationIcon from '@/assets/icons/organisation.webp';
 // import EmployeesIcon from '@/assets/icons/employees.webp';
@@ -11,14 +12,40 @@ import { ICONS } from '@/assets/url';
 
 export const colorConst = ['#02B9B0', '#FAC905', '#B774FC', '#B3BEBE'];
 
+export const statusCardConst = {
+  Active: {
+    color: 'light-teal',
+    backgroundColor: 'bg-light-teal-100',
+  },
+  'Payroll only': {
+    color: 'light-gray-300',
+    backgroundColor: 'bg-light-gray-500',
+  },
+  'Invite sent': {
+    color: 'light-purple-100',
+    backgroundColor: 'bg-light-purple-200',
+  },
+};
+
 export const employeeColumnHeader = [
   {
     key: 'Employee ID',
     header: 'Employee id',
+    render: (row, column) => (
+      <p className="font-quicksand font-semibold text-sm leading-6 underline text-light-teal ">
+        {row?.[column?.key]}
+      </p>
+    ),
   },
   {
     key: 'Employee Profile',
     header: 'Employee profile',
+    render: (row, column) => (
+      <div className="gap-4 flex ">
+        <Icon src={ICONS.AvatarIcon}></Icon>
+        {row?.[column?.key]}
+      </div>
+    ),
   },
   {
     key: 'Email',
@@ -31,6 +58,26 @@ export const employeeColumnHeader = [
   {
     key: 'Status',
     header: 'Status',
+    render: (row, column) => (
+      <div
+        className={`flex flex-row justify-center items-center rounded-xl w-fit h-8 px-3 py-4 gap-2 ${
+          statusCardConst[row?.[column?.key]]?.backgroundColor
+        }`}
+      >
+        <div
+          className={`w-2 h-2 rounded-full bg-${
+            statusCardConst[row?.[column?.key]]?.color
+          }`}
+        ></div>
+        <span
+          className={`text-base leading-6 font-semibold font-quicksand text-${
+            statusCardConst[row?.[column?.key]]?.color
+          }`}
+        >
+          {row?.[column?.key]}
+        </span>
+      </div>
+    ),
   },
 ];
 
@@ -93,24 +140,28 @@ export const sideBarManageConst = {
     label: 'Employees',
     title: 'Employees',
     disabled: false,
+    path: '/',
     icon: ICONS.EmployeesIcon,
   },
   payroll: {
     label: 'Payroll',
     title: 'Payroll',
     disabled: false,
+    path: '/payroll',
     icon: ICONS.PayrollIcon,
   },
   leaves: {
     label: 'Leaves',
     title: 'Leaves',
     disabled: false,
+    path: '/leaves',
     icon: ICONS.LeavesIcon,
   },
   claims: {
     label: 'Claims',
     title: 'Claims',
     disabled: false,
+    path: '/claims',
     icon: ICONS.ClaimsIcon,
   },
 
@@ -118,6 +169,7 @@ export const sideBarManageConst = {
     label: 'More',
     title: 'More',
     disabled: true,
+    path: '/',
     icon: ICONS.MoreIcon,
   },
 };

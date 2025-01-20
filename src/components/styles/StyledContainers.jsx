@@ -1,65 +1,29 @@
-import styled from 'styled-components';
+import React from 'react';
 
-export const MainContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-`;
+export const MainContainer = ({ children }) => (
+  <div className="min-h-screen flex">{children}</div>
+);
 
-export const MainContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  overflow-y: hidden;
-`;
+export const MainContentContainer = ({ children }) => (
+  <div className="flex flex-col w-full h-screen overflow-y-hidden">
+    {children}
+  </div>
+);
 
-export const MainBodyContainer = styled.main`
-  margin-top: 95px;
-  margin-left: 14rem;
-  background-color: #f2f5f5;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 85%;
-  overflow-x: hidden;
-`;
+export const MainBodyContainer = ({ children }) => (
+  <main className="mt-[95px] ml-[14rem] bg-[#f2f5f5] flex justify-center h-full w-[85%] overflow-x-hidden">
+    {children}
+  </main>
+);
 
-export const SideNavContainer = styled.div`
-  background-color: white;
-  width: 14rem;
-  padding: 1rem 1rem 0.5rem 1rem;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  border-right-width: thin;
-  @media (min-width: 1024px) {
-    display: block;
-  }
-  @media (max-width: 1024px) {
-    margin-top: 110px;
-    width: 100%;
-  }
-`;
+export const SideNavContainer = ({ children }) => (
+  <div className="bg-white lg:w-[14rem] lg:mt-0 p-4 h-screen fixed top-0 left-0 border-r border-gray-200 w-full sm:mt-[110px]">
+    {children}
+  </div>
+);
 
-export const TopNavContainer = styled.header`
-  background-color: white;
-  color: white;
-  width: 85%;
-  height: 95px;
-  border-bottom: solid 1px #e5e7eb;
-  display: flex;
-  align-items: center;
-  padding: 0.25rem;
-  padding-left: 1rem;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 14rem;
-  @media (max-width: 768px) {
-    width: 100%;
-    left: 0;
-  }
-`;
+export const TopNavContainer = ({ children }) => (
+  <header className="bg-white text-white lg:w-[85%] h-[95px] border-b border-gray-200 flex items-center p-1 pl-4 shadow-md fixed z-10 top-0 lg:left-[14rem] w-full left-0">
+    {children}
+  </header>
+);

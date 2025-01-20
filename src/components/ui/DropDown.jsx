@@ -25,14 +25,16 @@ const Dropdown = ({
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left w-fit">
       {/* Button for triggering dropdown */}
       <button
         type="button"
-        className="inline-flex justify-between items-center w-full rounded-xl border border-light-gray-200 bg-light-gray-400 px-3 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50 "
+        className="gap-2 inline-flex justify-between items-center min-w-max rounded-xl border border-light-gray-200 bg-light-gray-400 px-2 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50"
         onClick={toggleDropdown}
       >
-        <span>{selectedOption ? selectedOption : placeholder}</span>
+        <span className="truncate">
+          {selectedOption ? selectedOption : placeholder}
+        </span>
         <Icon
           src={ICONS.DownIcon}
           className={`ml-2 transform transition-transform ${
@@ -43,9 +45,8 @@ const Dropdown = ({
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute right-0 mt-2 w-auto min-w-max rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div
-            // className="py-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
@@ -54,10 +55,10 @@ const Dropdown = ({
               <button
                 key={index}
                 onClick={() => handleSelect(option)}
-                className="block w-full px-3 py-2 text-sm leading-6 font-semibold text-primary-black  hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                className="block w-full px-3 py-2 text-sm leading-6 font-semibold text-primary-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
                 role="menuitem"
               >
-                {option}
+                <span className="truncate">{option}</span>
               </button>
             ))}
           </div>

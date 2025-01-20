@@ -24,3 +24,8 @@ body {
   border: 4px dotted transparent; /* Set default border as dotted and transparent */
   border-image: radial-gradient(circle, #b3bebe 3px, transparent 6px) 1;
 }
+
+.Toastify__toast {
+  height: 56px;
+  min-height: 56px !important;
+}
