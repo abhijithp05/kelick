@@ -1,5 +1,9 @@
+import { useEffect } from 'react';
+import confetti from 'canvas-confetti';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ICONS } from '@/assets/url';
 // import SearchIcon from '@/assets/icons/search.webp';
 // import DownloadIcon from '@/assets/icons/download.webp';
@@ -42,6 +46,32 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
     // Save file using file-saver
     saveAs(excelFile, 'employees.xlsx');
   };
+
+  // Trigger confetti on component mount
+  useEffect(() => {
+    if (fileData.length > 0) {
+      toast.success(
+        <div className="flex items-center space-x-3 ">
+          <Icon src={ICONS.TickIcon} className="text-dark-gray text-2xl" />
+          <span className="font-quicksand font-semibold text-base leading-6  text-dark-gray">
+            Employees successfully added
+          </span>
+        </div>,
+        {
+          icon: false,
+          closeButton: false,
+          className:
+            'border border-solid bg-white border-light-gray-200 rounded-lg shadow-lg p-4',
+        }
+      );
+      confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.6 },
+      });
+    }
+  }, []);
+
   return (
     <div className="flex flex-col gap-6 h-full w-full p-6">
       <div className="flex flex-row gap-4 h-52 min-h-52">
@@ -112,6 +142,17 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
       {fileData?.length > 0 && (
         <div className="overflow-x-auto">
           <Table data={fileData} columns={employeeColumnHeader} />
+          <ToastContainer
+            position="bottom-center" // Position the toast container at the bottom center
+            autoClose={50000} // Duration in milliseconds before the toast automatically closes
+            hideProgressBar={true} // Show the progress bar
+            closeOnClick={true} // Close the toast on click
+            pauseOnHover={true} // Pause the timer when hovering over the toast
+            draggable={true} // Enable dragging the toast
+            pauseOnFocusLoss={false} // Do not pause on focus loss
+            theme="light" // Light theme for the toast
+            className="custom-toast-container"
+          />
         </div>
       )}
     </div>

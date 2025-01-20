@@ -2,7 +2,6 @@ import { useState, useCallback } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { ICONS } from '@/assets/url';
 // import DownIcon from '@/assets/icons/down.webp';
-import { StyledLink } from '../styles/StyledLink';
 import Icon from '../ui/Icon';
 
 export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
@@ -59,8 +58,8 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
               className="w-6 h-6"
               alt={`${value.label} Icon`}
             />
-            <StyledLink
-              className={`font-medium leading-5 text-base block px-2 py-2 text-dark-gray hover:text-gray-700 rounded ${
+            <a
+              className={`block   rounded font-medium leading-5 text-base  px-2 py-2 text-dark-gray hover:text-gray-700  ${
                 value.disabled ? 'pointer-events-none' : ''
               }`}
               onClick={() => handleLinkClick(value)}
@@ -68,7 +67,7 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
               aria-current={selected === value.label ? 'page' : undefined}
             >
               {value.label}
-            </StyledLink>
+            </a>
           </li>
         ))}
       </ul>

@@ -11,12 +11,13 @@
   "dependencies": {
     "@fontsource/quicksand": "^5.1.1",
     "autoprefixer": "^10.4.20",
+    "canvas-confetti": "^1.9.3",
     "file-saver": "^2.0.5",
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-toastify": "^11.0.3",
     "recharts": "^2.15.0",
-    "styled-components": "^6.1.14",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

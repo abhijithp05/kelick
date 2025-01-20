@@ -1,20 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { StyledIcon } from '@/components/styles/StyledIcon';
 import Image from 'next/image';
-
-// Wrapper component for the icon
-const StyledIconWrapper = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: ${(props) => props.width || '24px'}; // Default size
-  height: ${(props) => props.height || '24px'}; // Default size
-  color: ${(props) =>
-    props.color || ''}; // Allow dynamic color using Tailwind-like color
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-`;
 
 const Icon = ({
   icon: IconComponent,
@@ -34,20 +19,29 @@ const Icon = ({
   const isSvg = typeof IconComponent === 'function';
 
   return (
-    <StyledIconWrapper
+    <div
+      className={`inline-flex justify-center items-center w-[${
+        width || '24px'
+      }] h-[${height || '24px'}] ${color ? `text-${color}` : ''} ${
+        disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+      }`}
       color={color}
       disabled={disabled}
-      className={className}
       width={width}
       height={height}
       {...rest}
     >
       {isSvg ? (
-        <StyledIcon
+        <Image
           as={IconComponent}
-          fill={color}
           width={width}
           height={height}
+          alt={alt}
+          layout="fill" // Ensures Image covers its parent container
+          objectFit="contain"
+          className={`transition-all duration-200 ${
+            color ? `fill-[${color}]` : ''
+          }`}
         />
       ) : (
         <Image
@@ -59,7 +53,7 @@ const Icon = ({
           style={{ objectFit: 'contain', width: '100%', height: '100%' }}
         />
       )}
-    </StyledIconWrapper>
+    </div>
   );
 };
 
