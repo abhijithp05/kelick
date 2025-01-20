@@ -30,8 +30,6 @@ const HomeScreen = () => {
     setFilter((prev) => ({ ...prev, [type]: selectedValue }));
   };
 
-  console.log('file', file);
-
   useEffect(() => {
     if (file.length === 0) {
       setApplicationContext({

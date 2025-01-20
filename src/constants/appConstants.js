@@ -140,24 +140,28 @@ export const sideBarManageConst = {
     label: 'Employees',
     title: 'Employees',
     disabled: false,
+    path: '/',
     icon: ICONS.EmployeesIcon,
   },
   payroll: {
     label: 'Payroll',
     title: 'Payroll',
     disabled: false,
+    path: '/payroll',
     icon: ICONS.PayrollIcon,
   },
   leaves: {
     label: 'Leaves',
     title: 'Leaves',
     disabled: false,
+    path: '/leaves',
     icon: ICONS.LeavesIcon,
   },
   claims: {
     label: 'Claims',
     title: 'Claims',
     disabled: false,
+    path: '/claims',
     icon: ICONS.ClaimsIcon,
   },
 
@@ -165,6 +169,7 @@ export const sideBarManageConst = {
     label: 'More',
     title: 'More',
     disabled: true,
+    path: '/',
     icon: ICONS.MoreIcon,
   },
 };

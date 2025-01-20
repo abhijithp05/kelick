@@ -3,6 +3,7 @@ import { useAppContext } from '@/context/AppContext';
 import { ICONS } from '@/assets/url';
 // import DownIcon from '@/assets/icons/down.webp';
 import Icon from '../ui/Icon';
+import Link from 'next/link';
 
 export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
   const { setApplicationContext } = useAppContext() || {};
@@ -58,16 +59,16 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
               className="w-6 h-6"
               alt={`${value.label} Icon`}
             />
-            <a
+            <Link
               className={`block   rounded font-medium leading-5 text-base  px-2 py-2 text-dark-gray hover:text-gray-700  ${
                 value.disabled ? 'pointer-events-none' : ''
               }`}
               onClick={() => handleLinkClick(value)}
-              to={value.path}
+              href={value?.path || '/'}
               aria-current={selected === value.label ? 'page' : undefined}
             >
               {value.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
