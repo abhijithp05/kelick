@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { ICONS } from '@/assets/url';
 // import DownIcon from '@/assets/icons/down.webp';
-import { StyledLink } from '../styles/StyledLink';
 import Icon from '../ui/Icon';
+import Link from 'next/link';
 
 export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
   const { setApplicationContext } = useAppContext() || {};
@@ -50,25 +50,25 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
             key={key}
             className={`flex flex-row items-center ml-2 gap-[10px] ${
               selected === value.label
-                ? 'bg-light-gray-100 border-light-gray-200 border-[1px] rounded-[12px] p-1'
+                ? 'bg-light-gray-100 border-light-gray-200 border-[1px] rounded-[12px] px-1 py-[2px]'
                 : ''
-            }`}
+            } hover:bg-light-gray-400 hover:border-light-gray-200 hover:border-[1px] hover:rounded-[12px] hover:p-[2px]`}
           >
             <Icon
               src={value.icon}
               className="w-6 h-6"
               alt={`${value.label} Icon`}
             />
-            <StyledLink
-              className={`font-medium leading-5 text-base block px-2 py-2 text-dark-gray hover:text-gray-700 rounded ${
+            <Link
+              className={`block   rounded font-medium leading-5 text-base  px-2 py-2 text-dark-gray hover:text-gray-700  ${
                 value.disabled ? 'pointer-events-none' : ''
               }`}
               onClick={() => handleLinkClick(value)}
-              to={value.path}
+              href={value?.path || '/'}
               aria-current={selected === value.label ? 'page' : undefined}
             >
               {value.label}
-            </StyledLink>
+            </Link>
           </li>
         ))}
       </ul>

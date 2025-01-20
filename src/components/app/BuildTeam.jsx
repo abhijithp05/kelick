@@ -36,24 +36,20 @@ const BuildTeam = ({ onBulkUploadClick }) => {
         </Text>
         <div className="flex flex-row gap-4 mt-7">
           <Button
-            className="items-center flex justify-around w-40 rounded-xl bg-light-gray-400 border-light-gray-200 border-[1px] px-4 py-2"
-            aria-label="Bulk Upload button"
+            variant="secondary"
+            iconStart={ICONS.BulkUpload}
             onClick={onBulkUploadClick}
+            aria-label="Bulk Upload button"
+            altIcon="bulk upload"
           >
-            <Icon src={ICONS.BulkUpload} alt="bulk upload" />
-            <Text className="text-base text-dark-gray font-semibold leading-6 font-quicksand">
-              Bulk Upload
-            </Text>
+            Bulk Upload
           </Button>
           <Button
-            className="items-center flex justify-around w-44 rounded-xl bg-light-teal border-light-gray-200 border-[1px] px-4 py-2"
+            iconStart={ICONS.AddEmployee}
+            alt="bulk upload"
             aria-label="Bulk Upload button"
-            // onClick={handleSettingIconClick}
           >
-            <Icon src={ICONS.AddEmployee} alt="bulk upload" />
-            <Text className="text-base text-white font-semibold leading-6 font-quicksand">
-              Add Employee
-            </Text>
+            Add Employee
           </Button>
         </div>
       </div>

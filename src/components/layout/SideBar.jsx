@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { ICONS } from '@/assets/url';
 // import KelickLogo from '@/assets/icons/kelick-logo-svg.svg';
 import Icon from '../ui/Icon';
@@ -13,6 +14,7 @@ import { MenuItem } from '../app/MenuItem';
 import { AccountPanel } from '../app/AccountPanel';
 
 const SideBar = () => {
+  const router = useRouter();
   const windowWidth = useWindowWidth();
 
   return (
@@ -23,6 +25,7 @@ const SideBar = () => {
             <Icon
               src={ICONS.KelickLogo}
               // className="w-28 h-7"
+              onClick={() => router.push('/')}
               width={28}
               height={7}
               alt="Kelick Logo"

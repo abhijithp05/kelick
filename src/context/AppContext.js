@@ -14,6 +14,9 @@ export const AppContextProvider = ({ children }) => {
       userName: 'John Doe',
       email: 'johndoe@asure.pro',
     },
+    topNav: {
+      showAddEmployee: false,
+    },
   });
 
   const setApplicationContext = (newContext) => {
