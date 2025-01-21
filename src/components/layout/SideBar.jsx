@@ -1,30 +1,32 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { ICONS } from '@/assets/url';
-// import KelickLogo from '@/assets/icons/kelick-logo-svg.svg';
-import Icon from '../ui/Icon';
+import { ICONS } from '@/assets';
 import {
   organizationsConst,
   sideBarManageConst,
   dashboardConst,
 } from '@/constants/appConstants';
+import { useAppContext } from '@/context/AppContext';
+import { Icon, MenuItem } from '../ui/';
 import { SideNavContainer } from '../styles/StyledContainers';
-import useWindowWidth from '@/hooks/useWindowWidth';
-import { MenuItem } from '../app/MenuItem';
-import { AccountPanel } from '../app/AccountPanel';
+import AccountPanel from '../app/card/AccountPanel';
 
 const SideBar = () => {
   const router = useRouter();
-  const windowWidth = useWindowWidth();
+  const { appContext: { isSideBarVisible = true } = {} } =
+    useAppContext() || {};
 
   return (
-    <SideNavContainer role="navigation" aria-label="Main Navigation">
-      <nav className="flex flex-col justify-between h-full">
+    <SideNavContainer
+      isSideBarVisible={isSideBarVisible}
+      role="navigation"
+      aria-label="Main Navigation"
+    >
+      <nav className="flex flex-col justify-between h-full min-w-full">
         <div>
           <div className="flex flex-row items-center mb-8">
             <Icon
               src={ICONS.KelickLogo}
-              // className="w-28 h-7"
               onClick={() => router.push('/')}
               width={28}
               height={7}

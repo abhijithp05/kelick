@@ -1,17 +1,23 @@
+import dynamic from 'next/dynamic';
 import { Layout } from '@/components/layout';
-import { UploadFile } from '@/components/app/UploadFile';
-import { useEffect, useMemo, useState } from 'react';
-import BuildTeam from '@/components/app/BuildTeam';
-import EmployeeDashboard from '@/components/app/EmployeeDashboard';
+import { Suspense, useEffect, useMemo, useState } from 'react';
+import BuildTeam from '@/components/app/landing/BuildTeam';
 import { getCount } from '@/utility/getCount';
 import {
   employeeRoleConst,
   employeeStatusConst,
 } from '@/constants/appConstants';
 import { useAppContext } from '@/context/AppContext';
+import { Loader } from '@/components/ui';
+
+const EmployeeDashboard = dynamic(() =>
+  import('@/components/app/dashboard/EmployeeDashboard')
+);
+const UploadFile = dynamic(() => import('@/components/app/modals/UploadFile'));
 
 const HomeScreen = () => {
   const { setApplicationContext } = useAppContext() || {};
+  const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [filter, setFilter] = useState({ role: '', status: '' });
@@ -22,8 +28,12 @@ const HomeScreen = () => {
   };
 
   const handleFileUploadSubmit = (file) => {
+    setIsLoading(true);
     setFile(file);
     setOpen(() => false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, [1000]);
   };
 
   const handleTableFilter = (type, selectedValue) => {
@@ -42,7 +52,6 @@ const HomeScreen = () => {
     const { title } = employeeRoleConst || {};
     const roleCount = getCount(title.key, file);
     const statusCount = getCount(employeeStatusConst.title.key, file);
-
     setEmployeeOption((prev) => ({
       ...prev,
       roleOptions: ['All Role', ...Object.keys(roleCount)],
@@ -77,20 +86,23 @@ const HomeScreen = () => {
 
   return (
     <Layout>
-      <UploadFile
-        isModalOpen={isOpen}
-        onModalClose={handleModalClose}
-        onSubmit={handleFileUploadSubmit}
-      />
-      {file?.length === 0 ? (
-        <BuildTeam onBulkUploadClick={handleModalClose} />
-      ) : (
-        <EmployeeDashboard
-          employeeOptions={employeeOptions}
-          fileData={filteredEmployees}
-          onSelectFilter={handleTableFilter}
+      <Suspense fallback={<Loader />}>
+        <UploadFile
+          isModalOpen={isOpen}
+          onModalClose={handleModalClose}
+          onSubmit={handleFileUploadSubmit}
         />
-      )}
+        {isLoading && <Loader />}
+        {file?.length === 0 ? (
+          <BuildTeam onBulkUploadClick={handleModalClose} />
+        ) : (
+          <EmployeeDashboard
+            employeeOptions={employeeOptions}
+            fileData={filteredEmployees}
+            onSelectFilter={handleTableFilter}
+          />
+        )}
+      </Suspense>
     </Layout>
   );
 };

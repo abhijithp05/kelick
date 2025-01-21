@@ -1,4 +1,4 @@
-import { ICONS } from '@/assets/url';
+import { ICONS } from '@/assets';
 import Icon from '@/components/ui/Icon';
 // import DashboardIcon from '@/assets/icons/dashboard.webp';
 // import OrganisationIcon from '@/assets/icons/organisation.webp';
@@ -32,9 +32,9 @@ export const employeeColumnHeader = [
     key: 'Employee ID',
     header: 'Employee id',
     render: (row, column) => (
-      <p className="font-quicksand font-semibold text-sm leading-6 underline text-light-teal ">
+      <div className="font-quicksand font-semibold text-sm leading-6 underline text-light-teal ">
         {row?.[column?.key]}
-      </p>
+      </div>
     ),
   },
   {
@@ -60,7 +60,7 @@ export const employeeColumnHeader = [
     header: 'Status',
     render: (row, column) => (
       <div
-        className={`flex flex-row justify-center items-center rounded-xl w-fit h-8 px-3 py-4 gap-2 ${
+        className={`flex flex-row justify-center items-center rounded-xl w-fit h-12 lg:h-8 px-3 py-4 gap-2 ${
           statusCardConst[row?.[column?.key]]?.backgroundColor
         }`}
       >

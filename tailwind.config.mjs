@@ -8,6 +8,7 @@ export default {
   safelist: [
     'justify-center',
     'items-center',
+    'lg:min-w-1/4',
     'w-1/2',
     'w-40',
     'w-2',
@@ -55,6 +56,15 @@ export default {
         'light-teal-100': '#E2FFFD',
         'light-purple-100': '#8318E7',
         'light-purple-200': '#F2E5FF',
+      },
+      animation: {
+        'spin-ccw': 'spin-ccw 2s linear infinite',
+      },
+      keyframes: {
+        'spin-ccw': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
+        },
       },
     },
   },

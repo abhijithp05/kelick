@@ -1,7 +1,6 @@
-import AvatarIcon from '@/assets/icons/avatar.webp';
-import Icon from '../ui/Icon';
+import { ICONS } from '@/assets';
+import { Icon, Text } from '@/components/ui';
 import { useAppContext } from '@/context/AppContext';
-import Text from '../ui/Text';
 
 export const AccountBrief = () => {
   const { appContext: { accountInfo: { userName, email } = {} } = {} } =
@@ -9,9 +8,9 @@ export const AccountBrief = () => {
   return (
     <div className="flex flex-row gap-4 items-center ml-1">
       <Icon
-        width="32px"
-        height="32px"
-        src={AvatarIcon}
+        width={2}
+        height={2}
+        src={ICONS.AvatarIcon}
         className="w-8 h-8"
         alt="Account Icon"
       />

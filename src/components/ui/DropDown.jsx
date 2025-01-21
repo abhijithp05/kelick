@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { ICONS } from '@/assets/url';
-// import DownIcon from '@/assets/icons/down.webp';
+import { ICONS } from '@/assets';
 import Icon from './Icon';
 
 const Dropdown = ({
-  options,
+  options = [],
   onSelect,
   placeholder = 'Select an option',
   name,
@@ -12,7 +11,6 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -26,10 +24,9 @@ const Dropdown = ({
 
   return (
     <div className="relative inline-block text-left w-fit">
-      {/* Button for triggering dropdown */}
       <button
         type="button"
-        className="gap-2 inline-flex justify-between items-center min-w-max rounded-xl border border-light-gray-200 bg-light-gray-400 px-2 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50"
+        className="gap-2 inline-flex justify-between items-center min-w-max w-full rounded-xl border border-light-gray-200 bg-light-gray-400 px-2 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50 text-center"
         onClick={toggleDropdown}
       >
         <span className="truncate">
@@ -51,7 +48,7 @@ const Dropdown = ({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {options.map((option, index) => (
+            {options?.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleSelect(option)}
