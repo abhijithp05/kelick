@@ -71,13 +71,11 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
     reader.onload = (event) => {
       try {
         let data;
-        if (fileExtension === 'xlsx') {
+        if (fileExtension === 'xlsx' || fileExtension === 'csv') {
           const workbook = read(event.target.result, { type: 'binary' });
           const sheetName = workbook.SheetNames[0];
           const sheet = workbook.Sheets[sheetName];
           data = utils.sheet_to_json(sheet, { header: 1 });
-        } else if (fileExtension === 'csv') {
-          data = utils.csv_to_json(event.target.result, { header: 1 });
         }
 
         const result = data
