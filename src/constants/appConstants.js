@@ -1,4 +1,4 @@
-import { ICONS } from '@/assets/url';
+import { ICONS } from '@/assets';
 import Icon from '@/components/ui/Icon';
 // import DashboardIcon from '@/assets/icons/dashboard.webp';
 // import OrganisationIcon from '@/assets/icons/organisation.webp';

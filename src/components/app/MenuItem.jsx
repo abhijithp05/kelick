@@ -1,11 +1,10 @@
 import { useState, useCallback } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import { ICONS } from '@/assets/url';
-// import DownIcon from '@/assets/icons/down.webp';
+import { ICONS } from '@/assets';
 import Icon from '../ui/Icon';
 import Link from 'next/link';
 
-export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
+const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
   const { setApplicationContext } = useAppContext() || {};
   const [selected, setSelected] = useState('Employees');
   const [isExpended, setExpended] = useState(true);
@@ -75,3 +74,5 @@ export const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
     </div>
   );
 };
+
+export default React.memo(MenuItem);

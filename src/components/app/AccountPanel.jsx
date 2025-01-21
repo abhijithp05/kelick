@@ -5,7 +5,7 @@ import ProgressBar from './ProgressBar';
 import Text from '../ui/Text';
 import { AccountBrief } from './AccountBrief';
 
-export const AccountPanel = () => {
+const AccountPanel = () => {
   return (
     <div>
       <Divider />
@@ -26,3 +26,5 @@ export const AccountPanel = () => {
     </div>
   );
 };
+
+export default React.memo(AccountPanel);

@@ -5,7 +5,7 @@ import { useAppContext } from '@/context/AppContext';
 import Icon from '@/components/ui/Icon';
 import Text from '../ui/Text';
 import { Button } from '../ui';
-import { ICONS } from '@/assets/url';
+import { ICONS } from '@/assets';
 
 const TopNav = () => {
   const {
@@ -29,6 +29,7 @@ const TopNav = () => {
             <Icon
               height="14px"
               width="18px"
+              priority
               onClick={handleHamburgerIconClick}
               src={HamburgerIcon}
             />

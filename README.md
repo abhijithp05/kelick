@@ -105,7 +105,6 @@ index.js
 layout/
 StyledContainers.js
 StyledLink.js
-reportWebVitals.js
 routes/
 services/
 setupTests.js

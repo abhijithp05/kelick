@@ -1,5 +1,4 @@
-// import CancelIcon from '@/assets/icons/cancel.webp';
-import { ICONS } from '@/assets/url';
+import { ICONS } from '@/assets';
 import { Button } from '.';
 import Text from './Text';
 

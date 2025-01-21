@@ -1,14 +1,18 @@
+import dynamic from 'next/dynamic';
 import { Layout } from '@/components/layout';
-import { UploadFile } from '@/components/app/UploadFile';
 import { useEffect, useMemo, useState } from 'react';
 import BuildTeam from '@/components/app/BuildTeam';
-import EmployeeDashboard from '@/components/app/EmployeeDashboard';
 import { getCount } from '@/utility/getCount';
 import {
   employeeRoleConst,
   employeeStatusConst,
 } from '@/constants/appConstants';
 import { useAppContext } from '@/context/AppContext';
+
+const EmployeeDashboard = dynamic(() =>
+  import('@/components/app/EmployeeDashboard')
+);
+const UploadFile = dynamic(() => import('@/components/app/UploadFile'));
 
 const HomeScreen = () => {
   const { setApplicationContext } = useAppContext() || {};

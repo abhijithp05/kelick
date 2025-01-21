@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 import { CheckCircle } from 'lucide-react';
-import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ICONS } from '@/assets/url';
-// import SearchIcon from '@/assets/icons/search.webp';
-// import DownloadIcon from '@/assets/icons/download.webp';
+import { ICONS } from '@/assets';
 import { Button, Input } from '../ui';
 import Icon from '../ui/Icon';
 import Text from '../ui/Text';

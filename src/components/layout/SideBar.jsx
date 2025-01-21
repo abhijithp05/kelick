@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { ICONS } from '@/assets/url';
-// import KelickLogo from '@/assets/icons/kelick-logo-svg.svg';
+import { ICONS } from '@/assets';
 import Icon from '../ui/Icon';
 import {
   organizationsConst,
@@ -9,8 +8,8 @@ import {
   dashboardConst,
 } from '@/constants/appConstants';
 import { SideNavContainer } from '../styles/StyledContainers';
-import { MenuItem } from '../app/MenuItem';
-import { AccountPanel } from '../app/AccountPanel';
+import MenuItem from '../app/MenuItem';
+import AccountPanel from '../app/AccountPanel';
 import { useAppContext } from '@/context/AppContext';
 
 const SideBar = () => {

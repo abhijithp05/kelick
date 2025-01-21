@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ICONS } from '@/assets/url';
-// import DownIcon from '@/assets/icons/down.webp';
+import { ICONS } from '@/assets';
 import Icon from './Icon';
 
 const Dropdown = ({

@@ -1,13 +1,13 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { read, utils } from 'xlsx';
-import { ICONS } from '@/assets/url';
+import { ICONS } from '@/assets';
 import Modal from '../ui/Modal';
 import Text from '../ui/Text';
 import { Button, Input } from '../ui';
 import Icon from '../ui/Icon';
-import { sample_excel } from '@/assets/url';
+import { sample_excel } from '@/assets';
 
-export const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
+const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [fileData, setFileData] = useState([]);
   const [fileName, setFileName] = useState('');
@@ -262,3 +262,5 @@ export const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
     </Modal>
   );
 };
+
+export default UploadFile;

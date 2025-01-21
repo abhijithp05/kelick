@@ -1,4 +1,4 @@
-import AvatarIcon from '@/assets/icons/avatar.webp';
+import { ICONS } from '@/assets';
 import Icon from '../ui/Icon';
 import { useAppContext } from '@/context/AppContext';
 import Text from '../ui/Text';
@@ -11,7 +11,7 @@ export const AccountBrief = () => {
       <Icon
         width="32px"
         height="32px"
-        src={AvatarIcon}
+        src={ICONS.AvatarIcon}
         className="w-8 h-8"
         alt="Account Icon"
       />
