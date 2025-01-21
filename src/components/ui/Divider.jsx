@@ -1,4 +1,3 @@
-// components/Divider.js
 import React from 'react';
 
 const Divider = ({ className = '' }) => {

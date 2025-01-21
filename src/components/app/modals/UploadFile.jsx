@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { read, utils } from 'xlsx';
 import { ICONS } from '@/assets';
-import Modal from '../ui/Modal';
-import Text from '../ui/Text';
-import { Button, Input } from '../ui';
-import Icon from '../ui/Icon';
+import Modal from '../../ui/Modal';
+import Text from '../../ui/Text';
+import { Button, Input } from '../../ui';
+import Icon from '../../ui/Icon';
 import { sample_excel } from '@/assets';
 
 const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {

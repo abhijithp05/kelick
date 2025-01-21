@@ -1,68 +1,39 @@
-import React, { useState } from 'react';
 import { ICONS } from '@/assets';
-import Icon from './Icon';
+import React, { useState } from 'react';
+import { Icon } from '.';
 
 const Dropdown = ({
-  options,
+  options = [],
   onSelect,
   placeholder = 'Select an option',
   name,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // Toggle dropdown visibility
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   // Handle option select
-  const handleSelect = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    onSelect(name, option); // Pass the `name` and `selectedOption` to the parent
+  const handleSelect = (event) => {
+    const selectedValue = event?.target?.value || '';
+    setSelectedOption(selectedValue);
+    onSelect(name, selectedValue);
   };
 
   return (
-    <div className="relative inline-block text-left w-fit">
-      {/* Button for triggering dropdown */}
-      <button
-        type="button"
-        className="gap-2 inline-flex justify-between items-center min-w-max rounded-xl border border-light-gray-200 bg-light-gray-400 px-2 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50"
-        onClick={toggleDropdown}
+    <div className="relative inline-block text-left gap-4 w-fit">
+      <select
+        value={selectedOption || options[0]}
+        onChange={handleSelect}
+        className="focus:outline-none text-center h-full gap-2 inline-block justify-around items-center min-w-[auto] w-auto rounded-xl border border-light-gray-200 bg-light-gray-400 px-3 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50 font-quicksand"
+        style={{ whiteSpace: 'nowrap' }} // Prevent text wrapping in options
       >
-        <span className="truncate">
-          {selectedOption ? selectedOption : placeholder}
-        </span>
-        <Icon
-          src={ICONS.DownIcon}
-          className={`ml-2 transform transition-transform ${
-            isOpen ? 'rotate-180' : ''
-          }`}
-        />
-      </button>
-
-      {/* Dropdown menu */}
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-auto min-w-max rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="options-menu"
-          >
-            {options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleSelect(option)}
-                className="block w-full px-3 py-2 text-sm leading-6 font-semibold text-primary-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-                role="menuitem"
-              >
-                <span className="truncate">{option}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+        {options?.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      {/* <div className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none">
+        <Icon src={ICONS.DownIcon} />
+      </div> */}
     </div>
   );
 };

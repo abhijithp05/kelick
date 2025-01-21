@@ -8,8 +8,8 @@ import {
   dashboardConst,
 } from '@/constants/appConstants';
 import { SideNavContainer } from '../styles/StyledContainers';
-import MenuItem from '../app/MenuItem';
-import AccountPanel from '../app/AccountPanel';
+import MenuItem from '../ui/MenuItem';
+import AccountPanel from '../app/card/AccountPanel';
 import { useAppContext } from '@/context/AppContext';
 
 const SideBar = () => {

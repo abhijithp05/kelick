@@ -5,24 +5,25 @@ import * as XLSX from 'xlsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ICONS } from '@/assets';
-import { Button, Input } from '../ui';
-import Icon from '../ui/Icon';
-import Text from '../ui/Text';
-import Dropdown from '../ui/DropDown';
-import Table from '../ui/Table';
+import { Button, Input } from '../../ui';
+import Icon from '../../ui/Icon';
+import Text from '../../ui/Text';
+import Dropdown from '../../ui/DropDown';
+import Table from '../../ui/Table';
 import {
   employeeColumnHeader,
   employeeStatusConst,
   employeeTypeConst,
   nationalityConst,
 } from '@/constants/appConstants';
-import { EmployeeCard } from './EmployeeCard';
-import Modal from '../ui/Modal';
+import { EmployeeCard } from '../card/EmployeeCard';
+import Modal from '../../ui/Modal';
 
 const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [isSuccessModalOpen, setIsModalOpen] = useState(true);
   const { roleOptions, statusOptions } = employeeOptions || {};
+  console.log('roleOptions, statusOptions', roleOptions, statusOptions);
 
   const handleFilterChange = (name, selectedOption) => {
     onSelectFilter(name, selectedOption);
@@ -32,20 +33,6 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
     const { name, value } = e?.target || {};
     onSelectFilter(name, value);
   };
-  // const exportToExcel = () => {
-  //   const ws = XLSX.utils.json_to_sheet(fileData); // Convert JSON data to worksheet
-  //   const wb = XLSX.utils.book_new(); // Create a new workbook
-  //   XLSX.utils.book_append_sheet(wb, ws, 'Employees'); // Append the worksheet to the workbook
-
-  //   // Write workbook to a blob and trigger download
-  //   const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-  //   const excelFile = new Blob([excelBuffer], {
-  //     bookType: 'xlsx',
-  //     type: 'application/octet-stream',
-  //   });
-  //   saveAs(excelFile, 'employees.xlsx');
-  // };
-
   // Export selected rows as Excel
   const exportToExcel = () => {
     let idKey = 'Employee ID';
@@ -89,7 +76,7 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
 
   return (
     <div className="flex flex-col gap-6 h-full w-full p-6">
-      <div className="flex flex-row gap-4 h-52 min-h-52 overflow-x-auto scrollbar-hide lg:overflow-x-hidden">
+      <div className="flex flex-row gap-4 h-52 min-h-52 overflow-x-auto scrollbar-hide lg:overflow-x-clip">
         <div className="w-full lg:w-1/4 min-w-full lg:min-w-[25%]">
           <EmployeeCard cardInfo={nationalityConst} employeeDetail={fileData} />
         </div>

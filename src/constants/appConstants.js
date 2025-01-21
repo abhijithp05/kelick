@@ -32,9 +32,9 @@ export const employeeColumnHeader = [
     key: 'Employee ID',
     header: 'Employee id',
     render: (row, column) => (
-      <p className="font-quicksand font-semibold text-sm leading-6 underline text-light-teal ">
+      <div className="font-quicksand font-semibold text-sm leading-6 underline text-light-teal ">
         {row?.[column?.key]}
-      </p>
+      </div>
     ),
   },
   {

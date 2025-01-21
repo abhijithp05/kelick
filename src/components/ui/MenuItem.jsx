@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { ICONS } from '@/assets';
-import Icon from '../ui/Icon';
+import Icon from './Icon';
 import Link from 'next/link';
 
 const MenuItem = ({ title, style, isExpendable = false, menuItems }) => {
