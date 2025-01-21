@@ -8,7 +8,11 @@ Kelick is a web application built with React and NextJS that provides a user-fri
 
 ### Desktop
 
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/67df95ce-d1e4-41df-beec-9e0e2c025067" />
+
 ### Mobile
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/05a06390-85e5-4f0e-a4e9-3ceb6a1ba422" />
+
 
 ## Table of Contents
 
