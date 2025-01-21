@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { Layout } from '@/components/layout';
 import { Suspense, useEffect, useMemo, useState } from 'react';
-import BuildTeam from '@/components/app/BuildTeam';
+import BuildTeam from '@/components/app/landing/BuildTeam';
 import { getCount } from '@/utility/getCount';
 import {
   employeeRoleConst,

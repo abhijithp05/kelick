@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { CheckCircle } from 'lucide-react';
-import { utils, writeFile } from 'xlsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ICONS } from '@/assets';
@@ -13,6 +11,8 @@ import {
 } from '@/constants/appConstants';
 import { Icon, Text, Dropdown, Table, Modal, Button, Input } from '../../ui';
 import { EmployeeCard } from '../card/EmployeeCard';
+import { exportToExcel } from '@/utility/exportToExcel';
+import SuccessDialog from '../modals/SuccessDialog';
 
 const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -27,21 +27,9 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
     const { name, value } = e?.target || {};
     onSelectFilter(name, value);
   };
-  // Export selected rows as Excel
-  const exportToExcel = () => {
-    let idKey = 'Employee ID';
-    // Filter the selected rows from the original data
-    const selectedData = fileData.filter((row) =>
-      selectedRows.includes(row[idKey])
-    );
 
-    // Convert the selected data into a format that can be written to Excel
-    const ws = utils.json_to_sheet(selectedData);
-    const wb = utils.book_new();
-    utils.book_append_sheet(wb, ws, 'Selected Data');
-
-    // Create an Excel file and trigger download
-    writeFile(wb, 'employee_data.xlsx');
+  const handleExportClick = () => {
+    exportToExcel(fileData, selectedRows);
   };
 
   useEffect(() => {
@@ -127,7 +115,7 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
             iconStart={ICONS.DownloadIcon}
             altIcon="Export"
             aria-label="export as excel"
-            onClick={exportToExcel}
+            onClick={handleExportClick}
             className="w-48"
             disabled={selectedRows.length === 0}
           >
@@ -137,40 +125,10 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
       </div>
       {fileData?.length > 0 && (
         <div className="overflow-x-auto">
-          <Modal
-            isOpen={isSuccessModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            width="450px"
-            height="300px"
-          >
-            <div className="flex flex-col justify-center w-fit gap-2 self-start">
-              {/* Ensure DialogTitle is included */}
-              <div>
-                {/* Hidden but accessible */}
-                <CheckCircle className="text-center text-teal-500 w-12 h-12 mx-auto" />
-                <Text
-                  tag="h2"
-                  className="text-lg text-center font-semibold mt-4"
-                >
-                  Congrats! You’ve successfully added all your employees!
-                </Text>
-                <Text tag="h4" className="text-gray-600 mt-2 text-center">
-                  Would you like to generate payroll?
-                </Text>
-              </div>
-              <div className="flex justify-center mt-6 space-x-4">
-                <Button
-                  variant="secondary"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  I’ll do it later
-                </Button>
-                <Button variant="primary" onClick={() => setIsModalOpen(false)}>
-                  Generate Payroll
-                </Button>
-              </div>
-            </div>
-          </Modal>
+          <SuccessDialog
+            isSuccessModalOpen={isSuccessModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
           <Table
             data={fileData}
             columns={employeeColumnHeader}
