@@ -63,7 +63,6 @@ const HomeScreen = () => {
       },
     });
   }, [file]);
-  console.log('emploeeOption', employeeOptions);
 
   const filteredEmployees = useMemo(() => {
     return file.filter((employee) => {

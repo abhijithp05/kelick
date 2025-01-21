@@ -1,28 +1,30 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { read, utils } from 'xlsx';
 import { ICONS } from '@/assets';
 import { sample_excel } from '@/assets';
 import { Modal, Text, Button, Input, Icon } from '../../ui/';
 
 const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
-  const [isUploading, setIsUploading] = useState(false);
-  const [fileData, setFileData] = useState([]);
-  const [fileName, setFileName] = useState('');
-  const [error, setError] = useState('');
-  const [progress, setProgress] = useState(0); // Progress state
-  const [dragging, setDragging] = useState(false);
+  const [uploadState, setUploadState] = useState({
+    isUploading: false,
+    fileData: [],
+    fileName: '',
+    error: '',
+    progress: 0,
+    dragging: false,
+  });
 
-  const downloadFile = async () => {
-    let fileUrl = sample_excel;
+  const fileInputRef = useRef(null);
+  const isContinueBtnDisabled = () =>
+    uploadState.fileData?.length === 0 || uploadState.isUploading;
+  const downloadFile = useCallback(async () => {
     try {
-      const response = await fetch(fileUrl, { method: 'GET' });
-
+      const response = await fetch(sample_excel, { method: 'GET' });
       if (response.ok) {
         const blob = await response.blob();
         const link = document.createElement('a');
-        const fileName = fileUrl.split('/').pop();
         link.href = URL.createObjectURL(blob);
-        link.download = fileName;
+        link.download = sample_excel.split('/').pop();
         link.click();
       } else {
         console.error('Failed to fetch the file');
@@ -30,81 +32,52 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
     } catch (error) {
       console.error('Error downloading the file:', error);
     }
-  };
+  }, []);
 
-  const handleDrop = (event) => {
-    event.preventDefault();
-    setDragging(false); // Reset dragging state
-
-    const file = event.dataTransfer.files[0];
-    if (file) {
-      processFile(file);
-    }
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-    setDragging(true);
-  };
-
-  const handleDragLeave = () => {
-    setDragging(false);
-  };
-
-  const fileInputRef = useRef(null);
-
-  const handleClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleCloseClick = () => {
-    setFileName('');
-    setFileData([]);
-    onModalClose();
-  };
-
-  const handleFileUpload = (e) => {
+  const handleFileUpload = useCallback((e) => {
     const file = e.target.files[0];
-    if (file) {
-      processFile(file);
-    }
-  };
+    if (file) processFile(file);
+  }, []);
 
-  // Simulate progress while the file is being uploaded
-  const simulateUploadProgress = () => {
-    let simulatedProgress = 10;
-    const interval = setInterval(() => {
-      simulatedProgress += 10; // Increase progress by 10% every 0.5s
-      setProgress(() => simulatedProgress);
-      if (simulatedProgress >= 100) {
-        setIsUploading(false);
-        clearInterval(interval);
-      }
-    }, 200);
-  };
+  const handleDrop = useCallback((event) => {
+    event.preventDefault();
+    setUploadState((prevState) => ({ ...prevState, dragging: false }));
+    const file = event.dataTransfer.files[0];
+    if (file) processFile(file);
+  }, []);
+
+  const handleDragOver = useCallback((event) => {
+    event.preventDefault();
+    setUploadState((prevState) => ({ ...prevState, dragging: true }));
+  }, []);
+
+  const handleDragLeave = useCallback(() => {
+    setUploadState((prevState) => ({ ...prevState, dragging: false }));
+  }, []);
 
   const processFile = (file) => {
-    setIsUploading(true); // Start uploading
-    setProgress(0); // Reset progress to 0 before starting
-
-    simulateUploadProgress(); // Start simulating upload progress
+    setUploadState((prevState) => ({
+      ...prevState,
+      isUploading: true,
+      progress: 0,
+      fileName: file.name,
+      error: '',
+    }));
+    simulateUploadProgress();
 
     const fileExtension = file.name.split('.').pop().toLowerCase();
-    setFileName(file.name);
-
     const reader = new FileReader();
+
     reader.onload = (event) => {
       try {
         let data;
         if (fileExtension === 'xlsx') {
-          const binaryStr = event.target.result;
-          const workbook = read(binaryStr, { type: 'binary' });
+          const workbook = read(event.target.result, { type: 'binary' });
           const sheetName = workbook.SheetNames[0];
           const sheet = workbook.Sheets[sheetName];
-          data = utils.sheet_to_json(sheet, { header: 1 }); // Get rows as array of arrays
+          data = utils.sheet_to_json(sheet, { header: 1 });
         } else if (fileExtension === 'csv') {
-          const text = event.target.result;
-          data = utils.csv_to_json(text, { header: 1 }); // Convert CSV to JSON
+          data = utils.csv_to_json(event.target.result, { header: 1 });
         }
 
         const result = data
@@ -118,13 +91,19 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
             return obj;
           });
 
-        setFileData(result); // Save the parsed data
-        setError(''); // Reset error message
-        setProgress(100); // Set progress to 100 when file is done
+        setUploadState((prevState) => ({
+          ...prevState,
+          fileData: result,
+          error: '',
+          progress: 100,
+        }));
       } catch (err) {
-        setError('Error reading the file');
-        setIsUploading(false); // Set uploading to false if error occurs
-        setProgress(0); // Reset progress if error
+        setUploadState((prevState) => ({
+          ...prevState,
+          error: 'Error reading the file',
+          isUploading: false,
+          progress: 0,
+        }));
       }
     };
 
@@ -133,25 +112,71 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
     } else if (fileExtension === 'csv') {
       reader.readAsText(file);
     } else {
-      setError('Please upload a valid .xlsx or .csv file');
-      setIsUploading(false); // Set uploading to false if invalid file
-      setProgress(0); // Reset progress if invalid file
+      setUploadState((prevState) => ({
+        ...prevState,
+        error: 'Please upload a valid .xlsx or .csv file',
+        isUploading: false,
+        progress: 0,
+      }));
     }
   };
 
-  const handleContinue = () => {
-    onSubmit(fileData);
+  const simulateUploadProgress = () => {
+    let simulatedProgress = 10;
+    const interval = setInterval(() => {
+      simulatedProgress += 10;
+      setUploadState((prevState) => ({
+        ...prevState,
+        progress: simulatedProgress,
+      }));
+      if (simulatedProgress >= 100) {
+        setUploadState((prevState) => ({
+          ...prevState,
+          isUploading: false,
+        }));
+        clearInterval(interval);
+      }
+    }, 200);
   };
+
+  const handleCloseClick = () => {
+    setUploadState({
+      isUploading: false,
+      fileData: [],
+      fileName: '',
+      error: '',
+      progress: 0,
+      dragging: false,
+    });
+    onModalClose();
+  };
+
+  const handleContinue = () => {
+    onSubmit(uploadState.fileData);
+  };
+
+  useEffect(() => {
+    return () => {
+      setUploadState({
+        isUploading: false,
+        fileData: [],
+        fileName: '',
+        error: '',
+        progress: 0,
+        dragging: false,
+      });
+    };
+  }, []);
 
   return (
     <Modal isOpen={isModalOpen} onClose={handleCloseClick} title="Upload File">
       <div className="flex flex-col justify-center w-full gap-2">
-        {isUploading ? (
+        {uploadState.isUploading ? (
           <div className="mt-4 flex flex-col justify-center items-center">
             <div className="w-3/4 h-4 bg-gray-200 rounded-md overflow-hidden">
               <div
-                className="h-4 bg-teal-500 rounded-md transition-all duration-100" // Transition duration for smooth effect
-                style={{ width: `${progress}%` }}
+                className="h-4 bg-teal-500 rounded-md transition-all duration-100"
+                style={{ width: `${uploadState.progress}%` }}
               ></div>
             </div>
             <p className="w-3/4 text-gray-600 text-sm mb-2 self-center">
@@ -161,9 +186,9 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
         ) : (
           <div
             className={`w-full h-60 p-4 flex flex-col justify-center items-center border-dashed ${
-              error
+              uploadState.error
                 ? 'border-red-500'
-                : fileName
+                : uploadState.fileName
                 ? 'border-light-teal'
                 : 'border-light-gray-200'
             } bg-light-gray-400 rounded-2xl border-[2px]`}
@@ -172,17 +197,20 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
             onDragLeave={handleDragLeave}
           >
             <Icon src={ICONS.FolderIcon} width={4.5} height={4.5} />
-            {fileData.length > 0 ? (
+            {uploadState.fileData.length > 0 ? (
               <div className="w-auto h-7 bg-light-teal py-[2px] px-3 rounded-xl">
                 <span className="font-bold font-quicksand text-xs leading-5 text-white">
-                  {fileName}
+                  {uploadState.fileName}
                 </span>
               </div>
             ) : (
-              <Text className="font-quicksand font-medium text-sm leading-6 text-light-gray text-center">
+              <Text
+                tag="span"
+                className="font-quicksand font-medium text-sm leading-6 text-light-gray text-center"
+              >
                 Drag and drop your files here <br /> or{' '}
                 <Button
-                  onClick={handleClick}
+                  onClick={() => fileInputRef.current.click()}
                   variant="ghost"
                   className="underline text-light-gray font-quicksand font-bold text-sm leading-6"
                 >
@@ -194,7 +222,6 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
                   accept=".xlsx, .csv"
                   ref={fileInputRef}
                   onChange={handleFileUpload}
-                  id="file-input"
                 />
               </Text>
             )}
@@ -203,14 +230,14 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
         <div className="flex w-full justify-between">
           <Text
             className={`font-quicksand font-semibold text-xs leading-5 ${
-              error ? 'text-red-500' : 'text-light-gray-300'
+              uploadState.error ? 'text-red-500' : 'text-light-gray-300'
             }`}
           >
             Supported formats: XLS, CSV
           </Text>
           <Text
             className={`font-quicksand font-semibold text-xs leading-5 ${
-              error ? 'text-red-500' : 'text-light-gray-300'
+              uploadState.error ? 'text-red-500' : 'text-light-gray-300'
             }`}
           >
             Maximum file size: 25MB
@@ -236,23 +263,26 @@ const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
             iconStart={ICONS.DownloadIcon}
             aria-label="Download xlsx button"
             onClick={downloadFile}
-            altIcon="Download xlsx"
+            altIcon="Download XLSX"
           >
             Download XLSX
           </Button>
         </div>
       </div>
 
-      {/* Modal Footer */}
       <div className="flex flex-row gap-4 mt-0 lg:mt-7 self-end">
         <Button
           variant="secondary"
-          aria-label="Bulk Upload button"
+          aria-label="Cancel upload"
           onClick={handleCloseClick}
         >
           Cancel
         </Button>
-        <Button aria-label="Bulk Upload button" onClick={handleContinue}>
+        <Button
+          disabled={isContinueBtnDisabled()}
+          aria-label="Continue upload"
+          onClick={handleContinue}
+        >
           Continue
         </Button>
       </div>

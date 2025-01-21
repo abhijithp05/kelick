@@ -81,8 +81,8 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
         <Text className="w-full lg:w-1/4 font-quicksand font-bold text-xl leading-8 text-dark-gray tracking-tighter">
           All Employees
         </Text>
-        <div className="overflow-x-auto lg:overflow-x-hidden scrollbar-hide w-full lg:w-auto flex flex-row gap-5">
-          <div className="flex items-center  border-light-gray-200 bg-light-gray-400 rounded-xl px-3 min-w-52 max-w-xs w-full h-9 gap-2">
+        <div className="grid grid-cols-2 w-full lg:w-auto lg:flex lg:flex-row gap-5">
+          <div className="flex items-center  border-light-gray-200 bg-light-gray-400 rounded-xl px-3 min-w-40 lg:min-w-52 max-w-xs w-full h-9 gap-2">
             <Icon
               height={1.25}
               width={1.25}
@@ -116,7 +116,7 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
             altIcon="Export"
             aria-label="export as excel"
             onClick={handleExportClick}
-            className="w-48"
+            className="w-40 lg:w-48"
             disabled={selectedRows.length === 0}
           >
             Export
