@@ -1,9 +1,7 @@
 import React from 'react';
 import { ICONS } from '@/assets';
 import { Card } from '@/components/styles/StyledCard';
-import Icon from '@/components/ui/Icon';
-import Text from '@/components/ui/Text';
-import { Button } from '@/components/ui';
+import { Icon, Text, Button } from '@/components/ui';
 
 const BuildTeam = ({ onBulkUploadClick }) => {
   return (

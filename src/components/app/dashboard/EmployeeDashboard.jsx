@@ -1,29 +1,23 @@
 import { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 import { CheckCircle } from 'lucide-react';
-import * as XLSX from 'xlsx';
+import { utils, writeFile } from 'xlsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ICONS } from '@/assets';
-import { Button, Input } from '../../ui';
-import Icon from '../../ui/Icon';
-import Text from '../../ui/Text';
-import Dropdown from '../../ui/DropDown';
-import Table from '../../ui/Table';
 import {
   employeeColumnHeader,
   employeeStatusConst,
   employeeTypeConst,
   nationalityConst,
 } from '@/constants/appConstants';
+import { Icon, Text, Dropdown, Table, Modal, Button, Input } from '../../ui';
 import { EmployeeCard } from '../card/EmployeeCard';
-import Modal from '../../ui/Modal';
 
 const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [isSuccessModalOpen, setIsModalOpen] = useState(true);
   const { roleOptions, statusOptions } = employeeOptions || {};
-  console.log('roleOptions, statusOptions', roleOptions, statusOptions);
 
   const handleFilterChange = (name, selectedOption) => {
     onSelectFilter(name, selectedOption);
@@ -42,12 +36,12 @@ const EmployeeDashboard = ({ fileData, onSelectFilter, employeeOptions }) => {
     );
 
     // Convert the selected data into a format that can be written to Excel
-    const ws = XLSX.utils.json_to_sheet(selectedData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Selected Data');
+    const ws = utils.json_to_sheet(selectedData);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, 'Selected Data');
 
     // Create an Excel file and trigger download
-    XLSX.writeFile(wb, 'employee_data.xlsx');
+    writeFile(wb, 'employee_data.xlsx');
   };
 
   useEffect(() => {

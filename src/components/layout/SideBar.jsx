@@ -1,16 +1,15 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { ICONS } from '@/assets';
-import Icon from '../ui/Icon';
 import {
   organizationsConst,
   sideBarManageConst,
   dashboardConst,
 } from '@/constants/appConstants';
-import { SideNavContainer } from '../styles/StyledContainers';
-import MenuItem from '../ui/MenuItem';
-import AccountPanel from '../app/card/AccountPanel';
 import { useAppContext } from '@/context/AppContext';
+import { Icon, MenuItem } from '../ui/';
+import { SideNavContainer } from '../styles/StyledContainers';
+import AccountPanel from '../app/card/AccountPanel';
 
 const SideBar = () => {
   const router = useRouter();

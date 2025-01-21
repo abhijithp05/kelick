@@ -1,11 +1,9 @@
 import React from 'react';
 import HamburgerIcon from '@/assets/icons/hamburger.webp';
+import { ICONS } from '@/assets';
 import { TopNavContainer } from '../styles/StyledContainers';
 import { useAppContext } from '@/context/AppContext';
-import Icon from '@/components/ui/Icon';
-import Text from '../ui/Text';
-import { Button } from '../ui';
-import { ICONS } from '@/assets';
+import { Button, Text, Icon } from '../ui';
 
 const TopNav = () => {
   const {

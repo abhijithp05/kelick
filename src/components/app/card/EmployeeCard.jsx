@@ -1,9 +1,8 @@
 import { getChartData } from '@/utility/getChartData';
 import { getCount } from '@/utility/getCount';
 import { Card } from '@/components/styles/StyledCard';
-import Text from '../../ui/Text';
 import DonutChart from '@/components/charts/DonutChart';
-import SegmentedProgressBar from '../../ui/SegmentedProgressBar';
+import { Text, SegmentedProgressBar } from '../../ui';
 
 export const EmployeeCard = ({
   cardInfo,
