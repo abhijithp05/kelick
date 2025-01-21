@@ -1,11 +1,9 @@
+import React from 'react';
 import { freePlanConst, notificationConst } from '@/constants/appConstants';
-import Divider from '../ui/Divider';
-import { MenuItem } from './MenuItem';
-import ProgressBar from './ProgressBar';
-import Text from '../ui/Text';
+import { ProgressBar, MenuItem, Divider, Text } from '@/components/ui';
 import { AccountBrief } from './AccountBrief';
 
-export const AccountPanel = () => {
+const AccountPanel = () => {
   return (
     <div>
       <Divider />
@@ -26,3 +24,5 @@ export const AccountPanel = () => {
     </div>
   );
 };
+
+export default React.memo(AccountPanel);

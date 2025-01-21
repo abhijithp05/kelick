@@ -11,13 +11,17 @@ export const MainContentContainer = ({ children }) => (
 );
 
 export const MainBodyContainer = ({ children }) => (
-  <main className="mt-[95px] ml-[14rem] bg-[#f2f5f5] flex justify-center h-full w-[85%] overflow-x-hidden">
+  <main className="mt-[95px] ml-0 lg:ml-[14rem] bg-[#f2f5f5] flex justify-center h-full w-full lg:w-[85%] overflow-x-hidden">
     {children}
   </main>
 );
 
-export const SideNavContainer = ({ children }) => (
-  <div className="bg-white lg:w-[14rem] lg:mt-0 p-4 h-screen fixed top-0 left-0 border-r border-gray-200 w-full sm:mt-[110px]">
+export const SideNavContainer = ({ isSideBarVisible, children }) => (
+  <div
+    className={`${
+      isSideBarVisible ? 'flex' : 'hidden'
+    } lg:flex bg-white lg:w-[14rem] lg:mt-0 p-4 h-[90%] lg:h-screen fixed lg:top-0 top-24 left-0 border-r border-gray-200 w-full sm:mt-[110px]`}
+  >
     {children}
   </div>
 );

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Icon from './Icon';
-import { ICONS } from '@/assets/url';
-// import * as XLSX from 'xlsx';
+import { ICONS } from '@/assets';
 
 const Table = ({
   columns,

@@ -5,11 +5,13 @@ const Icon = ({
   icon: IconComponent,
   src,
   className,
-  loading = 'lazy',
+  loading = 'eager',
   width = 1.5,
   height = 1.5,
   color,
   disabled,
+  loader,
+  priority = false,
   alt = 'Icon',
   ...rest
 }) => {
@@ -43,6 +45,8 @@ const Icon = ({
         />
       ) : (
         <Image
+          loader={loader}
+          priority={priority}
           src={src}
           alt={alt}
           width={width}

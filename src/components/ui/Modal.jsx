@@ -1,8 +1,6 @@
-// import CancelIcon from '@/assets/icons/cancel.webp';
-import { ICONS } from '@/assets/url';
+import { ICONS } from '@/assets';
 import { Button } from '.';
 import Text from './Text';
-import Icon from './Icon';
 
 const Modal = ({
   isOpen,
@@ -10,7 +8,6 @@ const Modal = ({
   onClose,
   width = '50%',
   height = '66%',
-  onSubmit,
   children,
 }) => {
   return (
@@ -20,7 +17,7 @@ const Modal = ({
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
           {/* Modal Content */}
           <div
-            className={`flex flex-col gap-5 bg-white rounded-lg p-6 pt-1 max-w-[${width}] w-[${width}] h-[${height}]  mx-4 relative`}
+            className={`flex flex-col gap-5 bg-white rounded-lg p-1 lg:p-6 lg:pt-1 xs:w-[95%] lg:max-w-[${width}] lg:w-[${width}] h-[${height}]  mx-4 relative`}
           >
             {/* Close Button */}
             <div className="flex flex-row justify-between">

@@ -2,7 +2,13 @@
 
 ## Overview
 
-Project Name is a web application built with React that provides a user-friendly interface for managing tasks and settings. The application features a sidebar for navigation, various charts for data visualization, and customizable user settings.
+Kelick is a web application built with React and NextJS that provides a user-friendly interface for managing HR based solutions. The application features a sidebar for navigation, various charts for data visualization, and a bulk upload feature.
+
+## Lighthouse Report
+
+### Desktop
+
+### Mobile
 
 ## Table of Contents
 
@@ -10,7 +16,7 @@ Project Name is a web application built with React that provides a user-friendly
 - [Usage](#usage)
 - [Folder Structure](#folder-structure)
 - [Features](#features)
-- [BranchingStrategy]
+- [BranchingStrategy](#branching-strategy)
 - [Contributing](#contributing)
 
 ## Installation
@@ -20,7 +26,7 @@ To get started with the project, follow these steps:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/abhijithp05/soar.git
+   git clone https://github.com/abhijithp05/kelick.git
 
    ```
 
@@ -34,17 +40,13 @@ To get started with the project, follow these steps:
 
 4. To run the application locally, use the following command
 
-### `npm start`
+### `npm run dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
@@ -58,68 +60,104 @@ Your app is ready to be deployed!
 
 For deployment,
 
-1. Dev Env:
-   For DEV deployment, create a Pull request from the feature branch to the development branch and once changes are merged deployment will happen automatically.
-   https://soar-development.vercel.app/
-
-2. Prod Env
+1. Prod Env
 
 For deployment, create a Pull request from the development branch to the main branch and once changes are merged deployment will happen automatically.
-https://soar-alpha.vercel.app/
+https://kelick.vercel.app/
 
 ## Folder Structure
 
 ```sh
-[.eslintrc.js](http://\_vscodecontentref*/1)
-.gitignore
-[.prettierrc.json](http://_vscodecontentref_/2)
-[package.json](http://_vscodecontentref_/3)
-[postcss.config.js](http://_vscodecontentref_/4)
-public/
-index.html
-manifest.json
-robots.txt
-[README.md](http://_vscodecontentref_/5)
-src/
-assets/
-icons/
-components/
-Charts/
-BarChart.jsx
-LineGraph.jsx
-PieChart.jsx
-Common/
-Button.jsx
-Card.jsx
-Icon.jsx
-Input.jsx
-Layout/
-MainContent.jsx
-SideBar.jsx
-TopNav.jsx
-constants/
-sideBar.const.js
-hooks/
-index.css
-index.js
-layout/
-StyledContainers.js
-StyledLink.js
-reportWebVitals.js
-routes/
-services/
-setupTests.js
-styles/
-StyledContainers.js
-StyledLink.js
-[tailwind.config.js](http://_vscodecontentref_/6)
+Directory structure:
+└── abhijithp05-kelick/
+    ├── README.md
+    ├── eslint.config.mjs
+    ├── jsconfig.json
+    ├── next.config.mjs
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── tailwind.config.mjs
+    ├── .prettierrc.json
+    ├── public/
+    └── src/
+        ├── assets/
+        │   ├── index.js
+        │   └── icons/
+        │       └── hamburger.webp
+        ├── components/
+        │   ├── app/
+        │   │   ├── card/
+        │   │   │   ├── AccountBrief.jsx
+        │   │   │   ├── AccountPanel.jsx
+        │   │   │   └── EmployeeCard.jsx
+        │   │   ├── dashboard/
+        │   │   │   └── EmployeeDashboard.jsx
+        │   │   ├── landing/
+        │   │   │   └── BuildTeam.jsx
+        │   │   └── modals/
+        │   │       ├── SuccessDialog.jsx
+        │   │       └── UploadFile.jsx
+        │   ├── charts/
+        │   │   └── DonutChart.jsx
+        │   ├── layout/
+        │   │   ├── Layout.jsx
+        │   │   ├── SideBar.jsx
+        │   │   ├── TopNav.jsx
+        │   │   └── index.js
+        │   ├── styles/
+        │   │   ├── StyledCard.jsx
+        │   │   └── StyledContainers.jsx
+        │   └── ui/
+        │       ├── Button.jsx
+        │       ├── Divider.jsx
+        │       ├── DropDown.jsx
+        │       ├── Icon.jsx
+        │       ├── Input.jsx
+        │       ├── Loader.jsx
+        │       ├── MenuItem.jsx
+        │       ├── Modal.jsx
+        │       ├── ProgressBar.jsx
+        │       ├── SegmentedProgressBar.jsx
+        │       ├── Table.jsx
+        │       ├── Text.jsx
+        │       └── index.js
+        ├── constants/
+        │   └── appConstants.js
+        ├── context/
+        │   └── AppContext.js
+        ├── hooks/
+        │   ├── useFormData.js
+        │   ├── useFormError.js
+        │   ├── useLocalStorage.js
+        │   └── useWindowWidth.js
+        ├── pages/
+        │   ├── _app.js
+        │   ├── _document.js
+        │   ├── claims.js
+        │   ├── index.js
+        │   ├── leaves.js
+        │   ├── payroll.js
+        │   └── api/
+        │       └── hello.js
+        ├── screen/
+        │   ├── ClaimsScreen.jsx
+        │   ├── HomeScreen.jsx
+        │   ├── LeavesScreen.jsx
+        │   └── PayrollScreen.jsx
+        ├── styles/
+        │   └── globals.css
+        └── utility/
+            ├── exportToExcel.js
+            ├── getChartData.js
+            └── getCount.js
+
 ```
 
 ## Features
 
 1. Sidebar Navigation: Easy navigation through different sections of the application.
 2. Charts: Visual representation of data using bar charts, line graphs, and pie charts.
-3. User Settings: Customizable user settings stored in local storage.
+3. Employee Dashboard: Bulk upload employee detail using xlsx or csv files
 4. Responsive Design: Optimized for various screen sizes.
 
 ## Branching Strategy
@@ -128,9 +166,9 @@ StyledLink.js
 
 Branches in Git Flow:
 
-1. master: Contains the production-ready code. Each commit on master represents a stable, deployable state.
+1. main: Contains the production-ready code. Each commit on master represents a stable, deployable state.
 
-2. develop: This is the integration branch for ongoing work. All features are merged here before being released to production.
+2. developmewnt: This is the integration branch for ongoing work. All features are merged here before being released to production.
 
 3.feature/\*: Feature branches are used to develop new features or bug fixes. These are created from the develop branch and merged back into develop when complete.
 
@@ -140,18 +178,20 @@ Branches in Git Flow:
 
 ### Flow Example:
 
-1. Start with master and develop.
-2. Create a feature/ branch from develop.
-3. Merge the feature back into develop.
-4. When ready for a release, create a release/ branch from develop.
-5. Merge release/ into both master and develop.
-6. For urgent fixes, create a hotfix/ branch from master, fix, then merge into both master and develop.
+1. Start with main and development.
+2. Create a feature/ branch from development.
+3. Merge the feature back into development.
+4. When ready for a release, create a release/ branch from development.
+5. Merge release/ into both main and development.
+6. For urgent fixes, create a hotfix/ branch from main, fix, then merge into both main and development.
 
 ## Contributing
 
 Contributions are welcome! Please follow these steps to contribute:
 
-1.Fork the repository. 2. Create a new branch:
+1.Fork the repository.
+
+2. Create a new branch:
 
 ### `git checkout -b feature/your-feature-name`
 
