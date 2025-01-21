@@ -8,6 +8,7 @@ export default {
   safelist: [
     'justify-center',
     'items-center',
+    'lg:min-w-1/4',
     'w-1/2',
     'w-40',
     'w-2',

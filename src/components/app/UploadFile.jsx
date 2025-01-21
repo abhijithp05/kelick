@@ -219,7 +219,7 @@ export const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
             Maximum file size: 25MB
           </Text>
         </div>
-        <div className="w-full h-24 bg-light-gray-100 flex p-4 rounded-xl justify-between items-center">
+        <div className="w-full h-auto lg:h-24 bg-light-gray-100 flex flex-col lg:flex-row p-4 rounded-xl justify-between items-center">
           <div className="flex flex-row gap-4 items-center">
             <Icon src={ICONS.ExcelIcon} width={2.6} height={2.5} />
             <div className="flex flex-col">
@@ -247,7 +247,7 @@ export const UploadFile = ({ isModalOpen, onModalClose, onSubmit }) => {
       </div>
 
       {/* Modal Footer */}
-      <div className="flex flex-row gap-4 mt-7 self-end">
+      <div className="flex flex-row gap-4 mt-0 lg:mt-7 self-end">
         <Button
           variant="secondary"
           aria-label="Bulk Upload button"

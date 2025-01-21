@@ -60,7 +60,7 @@ export const employeeColumnHeader = [
     header: 'Status',
     render: (row, column) => (
       <div
-        className={`flex flex-row justify-center items-center rounded-xl w-fit h-8 px-3 py-4 gap-2 ${
+        className={`flex flex-row justify-center items-center rounded-xl w-fit h-12 lg:h-8 px-3 py-4 gap-2 ${
           statusCardConst[row?.[column?.key]]?.backgroundColor
         }`}
       >

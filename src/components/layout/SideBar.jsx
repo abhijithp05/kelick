@@ -9,22 +9,26 @@ import {
   dashboardConst,
 } from '@/constants/appConstants';
 import { SideNavContainer } from '../styles/StyledContainers';
-import useWindowWidth from '@/hooks/useWindowWidth';
 import { MenuItem } from '../app/MenuItem';
 import { AccountPanel } from '../app/AccountPanel';
+import { useAppContext } from '@/context/AppContext';
 
 const SideBar = () => {
   const router = useRouter();
-  const windowWidth = useWindowWidth();
+  const { appContext: { isSideBarVisible = true } = {} } =
+    useAppContext() || {};
 
   return (
-    <SideNavContainer role="navigation" aria-label="Main Navigation">
-      <nav className="flex flex-col justify-between h-full">
+    <SideNavContainer
+      isSideBarVisible={isSideBarVisible}
+      role="navigation"
+      aria-label="Main Navigation"
+    >
+      <nav className="flex flex-col justify-between h-full min-w-full">
         <div>
           <div className="flex flex-row items-center mb-8">
             <Icon
               src={ICONS.KelickLogo}
-              // className="w-28 h-7"
               onClick={() => router.push('/')}
               width={28}
               height={7}

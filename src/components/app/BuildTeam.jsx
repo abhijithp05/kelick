@@ -11,10 +11,9 @@ import { Button } from '@/components/ui';
 const BuildTeam = ({ onBulkUploadClick }) => {
   return (
     <Card
-      className="flex justify-center"
+      className="flex justify-center w-full lg:w-11/12"
       style={{
         height: '500px',
-        width: '90%',
         margin: '16px',
         borderRadius: '12px',
         backgroundColor: '#ffffff',
