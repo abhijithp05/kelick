@@ -26,7 +26,7 @@ const Dropdown = ({
     <div className="relative inline-block text-left w-fit">
       <button
         type="button"
-        className="gap-2 inline-flex justify-between items-center min-w-max w-full rounded-xl border border-light-gray-200 bg-light-gray-400 px-2 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50 text-center"
+        className="gap-2 inline-flex justify-between items-center min-w-max w-full rounded-xl border border-light-gray-200 bg-light-gray-400 px-2 py-2 text-sm leading-6 font-semibold text-primary-black shadow-sm hover:bg-gray-50 text-center font-quicksand"
         onClick={toggleDropdown}
       >
         <span className="truncate">
@@ -52,7 +52,7 @@ const Dropdown = ({
               <button
                 key={index}
                 onClick={() => handleSelect(option)}
-                className="block w-full px-3 py-2 text-sm leading-6 font-semibold text-primary-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                className="block w-full px-3 py-2 text-sm leading-6 font-quicksand font-medium text-primary-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
                 role="menuitem"
               >
                 <span className="truncate">{option}</span>
