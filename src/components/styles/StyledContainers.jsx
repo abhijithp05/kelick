@@ -20,7 +20,7 @@ export const SideNavContainer = ({ isSideBarVisible, children }) => (
   <div
     className={`${
       isSideBarVisible ? 'flex' : 'hidden'
-    } lg:flex bg-white lg:w-[14rem] lg:mt-0 p-4 h-[90%] lg:h-screen fixed lg:top-0 top-24 left-0 border-r border-gray-200 w-full sm:mt-[110px]`}
+    } lg:flex bg-white lg:w-[14rem] lg:mt-0 p-4 h-[90%] lg:h-screen fixed lg:top-0 top-24 left-0 border-r border-gray-200 w-full sm:mt-[110px] z-20`}
   >
     {children}
   </div>

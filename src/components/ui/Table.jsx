@@ -72,10 +72,10 @@ const Table = ({
             {columns.map((column) => (
               <th
                 key={column.key}
-                className="p-2 cursor-pointer "
+                className="p-2 cursor-pointer font-quicksand font-medium text-base leading-6 text-light-gray-300 "
                 onClick={() => handleSort(column.key)}
               >
-                <div className="flex items-center justify-between ml-2 mr-4">
+                <div className="flex items-center justify-between mr-4">
                   <span>{column.header}</span>
                   <span className="flex flex-col gap-1">
                     <Icon src={ICONS.UpIcon} width={0.6} height={0.3} />
