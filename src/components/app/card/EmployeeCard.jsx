@@ -47,8 +47,11 @@ export const EmployeeCard = ({
                 className={`w-1 h-full rounded-full`}
                 style={{ backgroundColor: item.color }}
               />
-              <p className="text-sm font-bold">
-                {item.value} <span className="font-normal">{item.name}</span>
+              <p className="font-quicksand font-semibold text-sm leading-6 text-dark-gray">
+                {item.value}
+                <span className="font-quicksand font-normal text-sm leading-6 text-dark-gray ml-1">
+                  {item.name}
+                </span>
               </p>
             </div>
           ))}
