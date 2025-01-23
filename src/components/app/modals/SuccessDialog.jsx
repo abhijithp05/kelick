@@ -1,6 +1,10 @@
-import { Button, Modal, Text } from '@/components/ui';
 import { CheckCircle } from 'lucide-react';
 import React from 'react';
+import dynamic from 'next/dynamic';
+import animationData from '@/assets/lottie/end-screen.json';
+import { Button, Modal, Text } from '@/components/ui';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 const SuccessDialog = ({ isSuccessModalOpen, setIsModalOpen }) => {
   return (
@@ -10,6 +14,13 @@ const SuccessDialog = ({ isSuccessModalOpen, setIsModalOpen }) => {
       width="450px"
       height="300px"
     >
+      <div className="absolute inset-0 pointer-events-none w-full sm:w-96 h-full sm:h-96">
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          className="absolute lg:w-[600px] lg:h-[600px] w-[350px] h-[350px] transform scale-90 sm:scale-100"
+        />
+      </div>
       <div className="flex flex-col justify-center w-fit gap-2 self-start">
         {/* Ensure DialogTitle is included */}
         <div>
